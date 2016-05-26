@@ -67,6 +67,9 @@ class HomeArticle extends React.Component {
           var reprint = document.getElementById('reprint').childNodes[0];
           reprint.innerHTML = '已申请';
         }
+        if(type == 'signup') {
+          window.location.href = result.data.oauth_url;
+        }
       },
       error: (err) => {
         console.log(err);
@@ -80,13 +83,18 @@ class HomeArticle extends React.Component {
 
   handleClick() {
     const { article } = this.state;
-    this.fetch({
-      service:'Article.SubmitReprintReq',
-      uid:uid,
-      token:token,
-      article_url:article.url,
-      org_id:article.org_id
-    },'reprint')
+
+    if(uid == '') {
+      this.fetch({service:'Wechat.GetOAuthUrlUserinfo'},'signup')
+    }else {
+      this.fetch({
+        service:'Article.SubmitReprintReq',
+        uid:uid,
+        token:token,
+        article_url:article.url,
+        org_id:article.org_id
+      },'reprint')
+    }
   }
 
   render() {
@@ -118,7 +126,7 @@ class HomeArticle extends React.Component {
                 id='reprint'
                 type='primary'
                 style={{margin: '15px 10px 0 -35px'}}>
-                我要转载
+                { uid == '' ? '加入联盟' : '我要转载' }
               </Button>
             </div>
           </div>

@@ -6,8 +6,6 @@ sessionStorage.reqMethod = 'jsonp';
 sessionStorage.method = 'get';
 sessionStorage.publicUrl = 'http://reprint.webei.cn/reprint/';
 
-
-
 class App extends React.Component {
   constructor() {
     super();

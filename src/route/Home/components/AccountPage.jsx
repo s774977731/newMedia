@@ -22,7 +22,7 @@ function getQueryString(name) {
   return null;
 }
 
-console.log(getQueryString('id'))
+var idToLink = getQueryString('id');
 
 class AccountPage extends React.Component {
   constructor() {
@@ -94,16 +94,13 @@ class AccountPage extends React.Component {
         </div>
       `
     }
-
-
     return {__html: contentList};
-
   }
   handleClick() {
     if(uid == '') {
       this.fetch({service:'Wechat.GetOAuthUrlUserinfo'},'signup')
     }else {
-
+      window.location.href = `?id=${idToLink}#/link`;
     }
   }
 

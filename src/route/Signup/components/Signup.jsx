@@ -260,6 +260,15 @@ class Signup extends React.Component {
       org_id:orgId,
       credential:credential
     }
+
+    if(orgValue == '' || formValue.rp == '' || formValue.phone == '' || formValue.sms_code == '') {
+      message.error('资料不完整请重新填写!~');
+      return;
+    }
+    if(credential == '') {
+      message.error('请上传图片');
+      return;
+    }
     this.fetch(params,'submit');
 
   }
